@@ -38,6 +38,9 @@
     <div class="starter-template">
         <h1>Система учёта заявок</h1>
         <h2>Message: ${message}</h2>
+		 <%
+         out.println("Your IP address is " + request.getRemoteAddr());
+      %>
     </div>
 
 </div>
