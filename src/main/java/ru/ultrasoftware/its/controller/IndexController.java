@@ -19,7 +19,11 @@ public class IndexController {
         model.put("message", this.message);
         return "index";
     }
-
+    @RequestMapping("/login")
+    public String login(Map<String, Object> model) {
+        model.put("message", this.message);
+        return "login";
+    }
     @RequestMapping("/locale")
     public String home(Locale locale) {
         return locale.toString();

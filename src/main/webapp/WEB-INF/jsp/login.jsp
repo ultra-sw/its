@@ -22,25 +22,37 @@
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/#">ИНТЕГРАЛ</a>
+            <a class="navbar-brand" href="#">ИНТЕГРАЛ</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/login">Войти</a></li>
+                <li class="active"><a href="#">Войти</a></li>
                 <li><a href="#about">Справка</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container">
-
-    <div class="starter-template">
-        <h1>Система учёта заявок</h1>
-        <h2>Message: ${message}</h2>
+ <section class="container">
+    <div class="login">
+      <h1>Войти в личный кабинет</h1>
+      <form method="post" action="index.html">
+        <p><input type="text" name="login" value="" placeholder="Логин или Email"></p>
+        <p><input type="password" name="password" value="" placeholder="Пароль"></p>
+        <p class="remember_me">
+          <label>
+            <input type="checkbox" name="remember_me" id="remember_me">
+            Запомнить меня
+          </label>
+        </p>
+        <p class="submit"><input type="submit" name="commit" value="Войти"></p>
+      </form>
     </div>
 
-</div>
+    <div class="login-help">
+      <a href="index.html">Забыли пароль?</a> Восстановите его!
+    </div>
+  </section>
 
 <script type="text/javascript" src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 
