@@ -24,6 +24,11 @@ public class IndexController {
         model.put("message", this.message);
         return "login";
     }
+    @RequestMapping("/enter")
+    public String enter(Map<String, Object> model) {
+        model.put("message", this.message);
+        return "enter";
+    }
     @RequestMapping("/locale")
     public String home(Locale locale) {
         return locale.toString();

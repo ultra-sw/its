@@ -36,7 +36,7 @@
  <section class="container">
     <div class="login">
       <h1>Войти в личный кабинет</h1>
-      <form method="post" action="index.html">
+      <form action="http://localhost:8080/enter" method="post" >
         <p><input type="text" name="login" value="" placeholder="Логин или Email"></p>
         <p><input type="password" name="password" value="" placeholder="Пароль"></p>
         <p class="remember_me">
