@@ -8,7 +8,7 @@
 
     <!-- Access the bootstrap Css like this,
         Spring boot will handle the resource mapping automatically -->
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
 
 	<spring:url value="/css/main.css" var="springCss" />
 	<link href="${springCss}" rel="stylesheet" />
@@ -26,7 +26,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/login">Войти</a></li>
+                <li><a href="/customer/login">Войти</a></li>
                 <li><a href="#about">Справка</a></li>
             </ul>
         </div>
@@ -37,10 +37,15 @@
 
     <div class="starter-template">
         <h1>Система учёта заявок</h1>
-        <h2>Message: ${message}</h2>
-		 <%
-         out.println("Your IP address is " + request.getRemoteAddr());
-      %>
+        <c:choose>
+            <c:when test="${customerInfo == null}">
+                <h2>Message: ${message}</h2>
+            </c:when>
+            <c:otherwise>
+                <h2>Добро пожаловать, ${customerInfo}</h2>
+            </c:otherwise>
+        </c:choose>
+        <% out.println("Your IP address is " + request.getRemoteAddr()); %>
 	  <p>Today's date: <%= (new java.util.Date()).toLocaleString()%></p>
     </div>
 
