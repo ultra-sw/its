@@ -32,11 +32,11 @@
         </div>
     </div>
 </nav>
-
+<center><h3><span style="color: #dc143c; ">${login}</span> ${password}</h3></center>
  <section class="container">
     <div class="login">
       <h1>Войти в личный кабинет</h1>
-      <form action="http://localhost:8080/enter" method="post" >
+      <form action="/login" method="post" >
         <p><input type="text" name="login" value="" placeholder="Логин или Email"></p>
         <p><input type="password" name="password" value="" placeholder="Пароль"></p>
         <p class="remember_me">
@@ -45,7 +45,7 @@
             Запомнить меня
           </label>
         </p>
-        <p class="submit"><input type="submit" name="commit" value="Войти"></p>
+        <p class="submit"><input type="submit" name="enter" value="Войти"></p>
       </form>
     </div>
 
