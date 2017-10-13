@@ -19,19 +19,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/#">ИНТЕГРАЛ</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/customer/login">Войти</a></li>
-                <li><a href="#about">Справка</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<jsp:directive.include file="\WEB-INF\jspf\head.jspf" />
 
 <div class="container">
 
