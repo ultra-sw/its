@@ -22,12 +22,13 @@
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/#">イヌテグラ　ソフト</a>
+            <a class="navbar-brand" href="/#">Интеграл - Софт</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/customer/login">入力する</a></li>
-                <li><a href="#about">ヘルプ</a></li>
+                <li><a href="/customer/login">Войти</a></li>
+                <li><a href="#about">Справка</a></li>
+                <li><a href="/jp/index">日本語のサイトを行きます。</a></li>
             </ul>
         </div>
     </div>
@@ -36,17 +37,23 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>管理のシステム</h1>
+        <h1>Система учёта заявок</h1>
         <c:choose>
             <c:when test="${customerInfo == null}">
-                <h2>メッセージ: ${message}</h2>
+                <h2>Сообщение: ${message}</h2>
             </c:when>
             <c:otherwise>
-                <h2>ようこそ, ${customerInfo}</h2>
+                <h2>Добро пожаловать, ${customerInfo}</h2>
             </c:otherwise>
         </c:choose>
-        <% out.println("Your IP address is " + request.getRemoteAddr()); %>
-	  <p>今は: <%= (new java.util.Date()).toLocaleString()%></p>
+        <% out.println("Ваш IP - адрес " + request.getRemoteAddr()); %>
+	  <p>Сегодня: <%= (new java.util.Date()).toLocaleString()%></p>
+	  
+	    <%
+	  
+	  out.println("hello kitty");
+	  
+	  %>
     </div>
 
 </div>

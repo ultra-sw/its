@@ -30,6 +30,11 @@ public class IndexController {
         model.put("message", this.message);
         return "login";
     }
+        @RequestMapping("/jp/index")
+    public String indexJP(Map<String, Object> model) {
+        model.put("message", this.message);
+        return "/jp/index";
+    }
     @RequestMapping("/enter")
     public String enter(Map<String, Object> model) {
         model.put("message", this.message);

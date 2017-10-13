@@ -8,7 +8,7 @@
 
     <!-- Access the bootstrap Css like this,
         Spring boot will handle the resource mapping automatically -->
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
 
 	<spring:url value="/css/main.css" var="springCss" />
 	<link href="${springCss}" rel="stylesheet" />
@@ -53,6 +53,7 @@
       <a href="index.html">Забыли пароль?</a> Восстановите его!
     </div>
   </section>
+
 
 <script type="text/javascript" src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 
