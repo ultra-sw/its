@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<jsp:directive.include file="\WEB-INF\jspf\head.jspf" />
+<jsp:directive.include file="/WEB-INF/jspf/head.jspf" />
 
 <div class="container">
 
@@ -33,7 +33,7 @@
                 <h2>Добро пожаловать, ${customerInfo}</h2>
             </c:otherwise>
         </c:choose>
-        <% out.println("Your IP address is " + request.getRemoteAddr()); %>
+        <% out.println( "Your IP address is " + request.getRemoteAddr()); %>
 	  <p>Today's date: <%= (new java.util.Date()).toLocaleString()%></p>
     </div>
 
