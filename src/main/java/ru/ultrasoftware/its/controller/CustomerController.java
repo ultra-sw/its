@@ -17,6 +17,7 @@ import java.util.Map;
 @RequestMapping("/customer")
 public class CustomerController {
     private static final String LOGIN_PAGE = "customer/login";
+    private static final String WELCOME_PAGE = "customer/welcome";
 
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
@@ -24,22 +25,27 @@ public class CustomerController {
     @Autowired
     SecurityService securityService;
 
-    @GetMapping(value = "/login")
-    public String renderLoginPage(Map<String, Object> model) {
-        return LOGIN_PAGE;
-    }
+//    @GetMapping(value = "/login")
+//    public String renderLoginPage() {
+//        return LOGIN_PAGE;
+//    }
 
-    @PostMapping(value = "/login")
-    public String doLogin(@RequestParam(value = USERNAME, required = true) String username,
-                          @RequestParam(value = PASSWORD, required = true) String password,
-                          ModelMap model, RedirectAttributes attributes) {
-        String customerInfo = securityService.authorize(username, password);
-        if(customerInfo != null) {
-            attributes.addFlashAttribute("customerInfo", customerInfo);
-            return "redirect:/";
-        } else {
-            model.addAttribute("success", false);
-            return LOGIN_PAGE;
-        }
+//    @PostMapping(value = "/login")
+//    public String doLogin(@RequestParam(value = USERNAME, required = true) String username,
+//                          @RequestParam(value = PASSWORD, required = true) String password,
+//                          ModelMap model, RedirectAttributes attributes) {
+//        String customerInfo = securityService.authorize(username, password);
+//        if(customerInfo != null) {
+//            attributes.addFlashAttribute("customerInfo", customerInfo);
+//            return "redirect:/";
+//        } else {
+//            model.addAttribute("success", false);
+//            return LOGIN_PAGE;
+//        }
+//    }
+
+    @GetMapping(value = "/welcome")
+    public String renderWelcomePage(Map<String, Object> model) {
+        return WELCOME_PAGE;
     }
 }
