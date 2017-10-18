@@ -1,0 +1,13 @@
+﻿ <%@page pageEncoding="UTF-8"%>
+<%
+
+ArrayList clients = new ArrayList();
+ArrayList topic = new ArrayList();
+clients.add("Александр"); topic.add("Сгорел чайник");
+clients.add("Федор"); topic.add("Зажевал принтер");
+clients.add("Евгений"); topic.add("Нет интернета");
+clients.add("Тимур"); topic.add("Я что-то нажала");
+clients.add("Григорий"); topic.add("Привезите пиццы");
+clients.add("Дизастер"); topic.add("У меня шеф выпилился");
+
+%>
