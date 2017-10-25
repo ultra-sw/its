@@ -8,6 +8,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +19,14 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-
+String URL1 = "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session?UserLogin=";
+String URL2 = "&Password=";
+String URL = URL1 + username + URL2 + password;
+System.out.println(URL);
+		RestTemplate restTemplate = new RestTemplate();
+		
+String result = restTemplate.postForObject(URL,null, String.class);
+System.out.println(result);
         //TODO get session id from otrs
         if (!("1".equals(username) && "1".equals(password))) {
             throw new BadCredentialsException("Incorrect username or password.");
