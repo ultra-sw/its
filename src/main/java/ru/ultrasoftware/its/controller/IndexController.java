@@ -1,6 +1,7 @@
 package ru.ultrasoftware.its.controller;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.util.Locale;
 import java.util.Map;
@@ -28,8 +30,20 @@ public class IndexController {
     @RequestMapping("/login")
     public String login(Map<String, Object> model) {
         model.put("message", this.message);
+       
+ //       model.put("wrong_text", "Проверьте правильность введённых данных");
         return "login";
     }
+    
+    @RequestMapping("/loginfail")
+    public String login1(Map<String, Object> model) {
+        model.put("message", this.message);
+       
+        model.put("wrong_text", "Неверное имя пользователя или пароль. Проверьте правильность введённых данных");
+        return "login";
+    }
+   
+        
     @RequestMapping("/enter")
     public String enter(Map<String, Object> model) {
         model.put("message", this.message);
