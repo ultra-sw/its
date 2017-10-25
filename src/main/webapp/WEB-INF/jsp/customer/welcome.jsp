@@ -4,6 +4,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.lang.Object"%>
+<%@page import="org.springframework.web.client.RestTemplate"%>
+
 <html>
 <head>
 
@@ -53,7 +56,7 @@
 				<%clients.add(clients.size(), name);%>
             </c:when>
             <c:otherwise>
-                <h2>Ну такое((</h2>
+        
             </c:otherwise>
         </c:choose>
 
@@ -75,7 +78,9 @@
             <p class="submit"><input type="submit" name="enter" value="Войти"></p>
         </form>
 		
-		
+		< %		RestTemplate restTemplate = new RestTemplate();
+		String result = restTemplate.postForObject("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket/1?UserLogin=alex.alkor@bk.ru&Password=54321", null, String.class); 
+		  %> -->
 </center></p>
 </body>
 
