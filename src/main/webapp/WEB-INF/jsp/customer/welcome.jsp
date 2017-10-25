@@ -77,10 +77,7 @@
 
             <p class="submit"><input type="submit" name="enter" value="Войти"></p>
         </form>
-		
-		< %		RestTemplate restTemplate = new RestTemplate();
-		String result = restTemplate.postForObject("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket/1?UserLogin=alex.alkor@bk.ru&Password=54321", null, String.class); 
-		  %> -->
+
 </center></p>
 </body>
 
