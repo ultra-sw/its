@@ -22,7 +22,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/customer/**").hasRole("CUSTOMER")
                 .and()
                 .formLogin()
-                .loginPage("/login").failureUrl("/loginfail");
+                .loginPage("/login").failureUrl("/login?error=failureUrl");
     }
 
 
