@@ -9,8 +9,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class IndexController {
@@ -26,8 +29,11 @@ public class IndexController {
         return "index";
     }
     @RequestMapping("/login")
-    public String login(Map<String, Object> model) {
+    public String login(Map<String, Object> model, HttpServletRequest request) {
         model.put("message", this.message);
+        if (request.getParameter("error")!=null)
+        	 if (request.getParameter("error").equals("failureUrl")) 
+            	 model.put("wrong_text", "Неверное имя пользователя или пароль. Проверьте правильность введённых данных");
         return "login";
     }
     @RequestMapping("/enter")
