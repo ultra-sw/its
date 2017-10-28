@@ -26,9 +26,11 @@ public class IndexController {
         return "index";
     }
     @RequestMapping("/login")
-    public String login(Map<String, Object> model) {
+    public String login(@RequestParam(value = "error",required = false) String error, Map<String, Object> model) {
         model.put("message", this.message);
-        return "login";
+        if (error != null)
+            	 model.put("wrong_text", "Неверное имя пользователя или пароль. Проверьте правильность введённых данных");
+        return "login";        
     }
     @RequestMapping("/enter")
     public String enter(Map<String, Object> model) {
