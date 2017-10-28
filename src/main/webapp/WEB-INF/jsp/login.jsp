@@ -26,6 +26,9 @@
         <form action="/login" method="post">
             <p><input type="text" name="username" value="" placeholder="Логин или Email"></p>
             <p><input type="password" name="password" value="" placeholder="Пароль"></p>
+            <label>
+               <font color=red>${wrong_text}</font>
+            </label>           
             <p class="remember_me">
                 <label>
                     <input type="checkbox" name="remember_me" id="remember_me">
