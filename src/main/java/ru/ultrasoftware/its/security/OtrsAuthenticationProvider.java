@@ -9,6 +9,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+import ru.ultrasoftware.its.domain.OtrsSession;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -20,15 +24,17 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
         String password = (String) authentication.getCredentials();
 
         //TODO get session id from otrs
-		
-		String URL1 = "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session?UserLogin=";
-		String URL2 = "&Password=";
-		String URL = URL1 + username + URL2 + password;
-		System.out.println(URL);
+        UriComponents uri = UriComponentsBuilder
+                .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session")
+                .queryParam("UserLogin", username)
+                .queryParam("Password", password)
+                .build();
+        String urlString = uri.toUriString();
+		System.out.println(urlString);
 		RestTemplate restTemplate = new RestTemplate();
 		
-		String result = restTemplate.postForObject(URL,null, String.class);
-		System.out.println(result);
+		OtrsSession result = restTemplate.postForObject(urlString, null, OtrsSession.class);
+		System.out.println(result.getSessionId());
 		
         if (!("1".equals(username) && "1".equals(password))) {
             throw new BadCredentialsException("Incorrect username or password.");
