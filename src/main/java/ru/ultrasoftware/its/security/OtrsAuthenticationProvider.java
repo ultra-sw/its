@@ -22,7 +22,7 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-
+        
         //TODO get session id from otrs
         UriComponents uri = UriComponentsBuilder
                 .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session")
@@ -35,8 +35,8 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
 		
 		OtrsSession result = restTemplate.postForObject(urlString, null, OtrsSession.class);
 		System.out.println(result.getSessionId());
-		
-        if (!("1".equals(username) && "1".equals(password))) {
+
+        if (result.getSessionId()==null) {
             throw new BadCredentialsException("Incorrect username or password.");
         }
 
