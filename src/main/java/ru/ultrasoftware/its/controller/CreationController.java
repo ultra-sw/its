@@ -59,7 +59,7 @@ public class CreationController {
                               ,ModelMap model) {
 
 
-        //OTLADKA DLYA STRANICI USPEHA
+        //OTLADKA DLYA STRANICI successCreate
         model.addAttribute("title",title);
         model.addAttribute("email",email);
         model.addAttribute("queue",queue);
@@ -67,12 +67,14 @@ public class CreationController {
         model.addAttribute("priority",priority);
         model.addAttribute("subject",subject);
         model.addAttribute("body",body);
+        //OTLADKA DLYA STRANICI successCreate
 
 
 
 
         querry="{\"Ticket\": {\"UserLogin\": \""+email+"\",\"Password\": \"12345\",\"Title\": \""+title+"\",\"CustomerUser\": \""+email+"\",\"Queue\": \""+queue+"\",\"State\": \""+state+"\",\"Priority\": \""+priority+"\"},\"Article\": {\"Subject\": \""+subject+"\",\"Body\": \""+body+"\",\"ContentType\": \"text/plain; charset=utf8\"}}";
-        model.put("pwmn3",querry);
+
+        model.put("pwmn3",querry); //otladka
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
