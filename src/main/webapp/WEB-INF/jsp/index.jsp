@@ -37,6 +37,8 @@
 	  <p>Today's date: <%= (new java.util.Date()).toLocaleString()%></p>
     </div>
 
+
+
 </div>
 
 <script type="text/javascript" src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>

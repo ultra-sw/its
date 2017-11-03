@@ -1,5 +1,6 @@
 package ru.ultrasoftware.its.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,6 +14,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.ultrasoftware.its.domain.OtrsSession;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -34,9 +36,10 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
 		RestTemplate restTemplate = new RestTemplate();
 		
 		OtrsSession result = restTemplate.postForObject(urlString, null, OtrsSession.class);
+
 		System.out.println(result.getSessionId());
 		
-        if (!("1".equals(username) && "1".equals(password))) {
+        if (result.getSessionId()==null){
             throw new BadCredentialsException("Incorrect username or password.");
         }
 
