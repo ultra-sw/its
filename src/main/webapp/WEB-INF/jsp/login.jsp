@@ -19,7 +19,9 @@
 </head>
 <body>
 
-<jsp:directive.include file="/WEB-INF/jspf/head.jspf" />
+
+<jsp:directive.include file="/WEB-INF/jspf/guest_head.jspf" />
+
 <section class="container">
     <div class="login">
         <h1>Войти в личный кабинет</h1>
