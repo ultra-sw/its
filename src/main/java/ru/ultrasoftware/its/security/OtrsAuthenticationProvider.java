@@ -12,17 +12,19 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.ultrasoftware.its.domain.OtrsSession;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Component
 public class OtrsAuthenticationProvider implements AuthenticationProvider {
+    public static String session;
+    public static String username;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String username = authentication.getName();
+        username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        
+
         //TODO get session id from otrs
         UriComponents uri = UriComponentsBuilder
                 .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session")
@@ -35,7 +37,7 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
 		
 		OtrsSession result = restTemplate.postForObject(urlString, null, OtrsSession.class);
 		System.out.println(result.getSessionId());
-
+        session = result.getSessionId();
         if (result.getSessionId()==null) {
             throw new BadCredentialsException("Incorrect username or password.");
         }
