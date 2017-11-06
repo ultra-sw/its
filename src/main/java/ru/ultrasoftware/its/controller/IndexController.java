@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.Locale;
 import java.util.Map;
+import javax.servlet.http.*;
+import ru.ultrasoftware.its.security.OtrsAuthenticationProvider;
 
 @Controller
 public class IndexController {
@@ -21,8 +22,11 @@ public class IndexController {
 
     @GetMapping("/")
     @PostMapping("/")
-    public String root(Map<String, Object> model) {
+    public String root(Map<String, Object> model,HttpServletRequest request, HttpServletResponse response) {
         model.put("message", this.message);
+        HttpSession session = request.getSession();
+        session.setAttribute("sessionID", OtrsAuthenticationProvider.session);
+        model.put("user",OtrsAuthenticationProvider.username);
         return "index";
     }
     @RequestMapping("/login")
@@ -46,6 +50,14 @@ public class IndexController {
     public String home(Locale locale) {
         return locale.toString();
     }
+
+ /*   @RequestMapping("/")
+        public String session (Model model) {
+          model.addAttribute("session",OtrsAuthenticationProvider.session);
+            System.out.println(OtrsAuthenticationProvider.session);
+            return "index";
+        }*/
+
 	public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
 	
