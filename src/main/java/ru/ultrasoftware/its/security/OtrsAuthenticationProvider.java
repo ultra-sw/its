@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.ultrasoftware.its.domain.OtrsSession;
+import ru.ultrasoftware.its.domain.OtrsTickets;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,16 +30,27 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
                 .queryParam("UserLogin", username)
                 .queryParam("Password", password)
                 .build();
+        UriComponents tic = UriComponentsBuilder
+        		.fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
+        		.queryParam("UserLogin", username)
+                .queryParam("Password", password)
+        		.build();
+        		
         String urlString = uri.toUriString();
+        String urlTicket = tic.toUriString();
 		System.out.println(urlString);
+		System.out.println(urlTicket);
 		RestTemplate restTemplate = new RestTemplate();
 		
 		OtrsSession result = restTemplate.postForObject(urlString, null, OtrsSession.class);
+		OtrsTickets tickets = restTemplate.getForObject(urlTicket, OtrsTickets.class);
 		System.out.println(result.getSessionId());
 		
-        if (!("1".equals(username) && "1".equals(password))) {
+   /*     if (!("1".equals(username) && "1".equals(password))) {
             throw new BadCredentialsException("Incorrect username or password.");
         }
+*/for (int i = 0; i<tickets.ticketNumber(); i++)
+	System.out.println(tickets.getTicket(i));
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
