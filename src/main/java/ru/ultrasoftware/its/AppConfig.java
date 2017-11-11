@@ -20,6 +20,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/css/**", "/webjars/**", "/", "/index").permitAll()
                 .antMatchers("/customer/**").hasRole("CUSTOMER")
+                .antMatchers("/agent/**").hasRole("AGENT")
                 .and()
                 .formLogin()
                 .loginPage("/login").failureUrl("/login?error");
