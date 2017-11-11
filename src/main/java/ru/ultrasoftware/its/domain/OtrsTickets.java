@@ -1,22 +1,20 @@
-package ru.ultrasoftware.its.domain;
+package ru.ultrasoftware.its.domain; 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List; 
 
-public class OtrsTickets {
+import com.fasterxml.jackson.annotation.JsonProperty; 
 
-	@JsonProperty("TicketID")
-	private String[] ticket;
-	
-	public String getTicket(int i) {	
-        return ticket[i];
-    }
+public class OtrsTickets { 
 
-	public int ticketNumber() {
-		return ticket.length;
-	}
-	
-    public void setTicket(String[] ticket) {
-        this.ticket = ticket;
-    }
+@JsonProperty("TicketID") 
+private List ticket; 
 
+public Object getTicket(int i) { 
+return ticket.get(i); 
+} 
+
+public int ticketNumber() { ; 
+return ticket.size(); 
+} 
+ 
 }
