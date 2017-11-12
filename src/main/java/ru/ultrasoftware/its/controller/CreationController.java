@@ -1,16 +1,8 @@
 package ru.ultrasoftware.its.controller;
 
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.regexp.internal.RE;
-import org.apache.catalina.core.ApplicationContext;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.http.*;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.ultrasoftware.its.Temp;
-import ru.ultrasoftware.its.domain.OtrsSession;
+import ru.ultrasoftware.its.domain.TicketCreate;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
+
+
 import java.util.Map;
 
 /**
@@ -34,11 +24,18 @@ import java.util.Map;
 
 public class CreationController {
 
+
     public String querry;
+    @JsonProperty("Ticket")
+    private TicketCreate ticketCreate;
 
 
     @RequestMapping("/create")
     public String create(Map<String,Object> model) {
+
+
+
+
 
         return "create";
     }
@@ -48,7 +45,7 @@ public class CreationController {
         @RequestParam - указываем, что данный аргумент метода, является значение с формы с именем как название аргумент в java.
         author, text - приходят значения из input тегов.
      */
-    public String showMessage(@RequestParam String title, @RequestParam String email,
+    public String createTicket(@RequestParam String title, @RequestParam String email,
 
                               @RequestParam String queue,
                               @RequestParam String state,
@@ -57,7 +54,6 @@ public class CreationController {
                               @RequestParam String body
 
                               ,ModelMap model) {
-
 
         //OTLADKA DLYA STRANICI successCreate
         model.addAttribute("title",title);
@@ -69,24 +65,33 @@ public class CreationController {
         model.addAttribute("body",body);
         //OTLADKA DLYA STRANICI successCreate
 
+        //JSON PROPERTIES SETTERS BEGIN
 
+        ticketCreate.setTitle(title);
+        ticketCreate.setEmail(email);
+        ticketCreate.setPriority(priority);
+        ticketCreate.setSubject(subject);
+        ticketCreate.setBody(body);
 
+        //JSON PROPERTIES SETTERS END
 
-        querry="{\"Ticket\": {\"UserLogin\": \""+email+"\",\"Password\": \"12345\",\"Title\": \""+title+"\",\"CustomerUser\": \""+email+"\",\"Queue\": \""+queue+"\",\"State\": \""+state+"\",\"Priority\": \""+priority+"\"},\"Article\": {\"Subject\": \""+subject+"\",\"Body\": \""+body+"\",\"ContentType\": \"text/plain; charset=utf8\"}}";
+        //REQUEST BEGIN
 
-        model.put("pwmn3",querry); //otladka
+       UriComponents uri= UriComponentsBuilder
 
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<String>(querry,headers);
-        ResponseEntity<String> response = restTemplate.exchange("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket?UserLogin=wow.timur@yandex.ru&Password=12345", HttpMethod.POST,entity,String.class);
-        model.put("response",response);
+                .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
+                .queryParam("UserLogin","wow.timur@yandex.ru")
+                .queryParam("Password","12345")
+                .build();
+        String urlString = uri.toUriString();
+        RestTemplate rt= new RestTemplate();
+        rt.postForObject(urlString,null,TicketCreate.class);
+
+        //REQUEST END
+
+        model.put("OMG",ticketCreate.getTitle()); //otladka
 
        return "successCreate";
     }
-
-
 
 }
