@@ -24,19 +24,8 @@ import java.util.Map;
 
 public class CreationController {
 
-
-    public String querry;
-    @JsonProperty("Ticket")
-    private TicketCreate ticketCreate;
-
-
     @RequestMapping("/create")
     public String create(Map<String,Object> model) {
-
-
-
-
-
         return "create";
     }
 
@@ -45,15 +34,9 @@ public class CreationController {
         @RequestParam - указываем, что данный аргумент метода, является значение с формы с именем как название аргумент в java.
         author, text - приходят значения из input тегов.
      */
-    public String createTicket(@RequestParam String title, @RequestParam String email,
-
-                              @RequestParam String queue,
-                              @RequestParam String state,
-                              @RequestParam String priority,
-                              @RequestParam String subject,
-                              @RequestParam String body
-
-                              ,ModelMap model) {
+    public String createTicket(@RequestParam String title, @RequestParam String email, @RequestParam String queue,
+                              @RequestParam String state, @RequestParam String priority, @RequestParam String subject,
+                              @RequestParam String body, ModelMap model) {
 
         //OTLADKA DLYA STRANICI successCreate
         model.addAttribute("title",title);
@@ -67,6 +50,8 @@ public class CreationController {
 
         //JSON PROPERTIES SETTERS BEGIN
 
+        //Создаем новый экземпляр класса
+        TicketCreate ticketCreate = new TicketCreate();
         ticketCreate.setTitle(title);
         ticketCreate.setEmail(email);
         ticketCreate.setPriority(priority);
@@ -84,8 +69,14 @@ public class CreationController {
                 .queryParam("Password","12345")
                 .build();
         String urlString = uri.toUriString();
-        RestTemplate rt= new RestTemplate();
-        rt.postForObject(urlString,null,TicketCreate.class);
+
+        RestTemplate rt = new RestTemplate();
+
+        String response = rt.postForObject(urlString, ticketCreate, String.class);
+
+        //Вот тут в консоли выводится ошибка:
+        //{"Error":{"ErrorMessage":"TicketCreate: Ticket parameter is missing or not valid!","ErrorCode":"TicketCreate.MissingParameter"}}
+        System.out.println(response);
 
         //REQUEST END
 
