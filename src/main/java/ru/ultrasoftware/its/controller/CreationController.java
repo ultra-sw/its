@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+import ru.ultrasoftware.its.domain.Article;
+import ru.ultrasoftware.its.domain.Ticket;
 import ru.ultrasoftware.its.domain.TicketCreate;
 
 
@@ -25,18 +27,8 @@ import java.util.Map;
 public class CreationController {
 
 
-    public String querry;
-    @JsonProperty("Ticket")
-    private TicketCreate ticketCreate;
-
-
     @RequestMapping("/create")
     public String create(Map<String,Object> model) {
-
-
-
-
-
         return "create";
     }
 
@@ -45,15 +37,9 @@ public class CreationController {
         @RequestParam - указываем, что данный аргумент метода, является значение с формы с именем как название аргумент в java.
         author, text - приходят значения из input тегов.
      */
-    public String createTicket(@RequestParam String title, @RequestParam String email,
-
-                              @RequestParam String queue,
-                              @RequestParam String state,
-                              @RequestParam String priority,
-                              @RequestParam String subject,
-                              @RequestParam String body
-
-                              ,ModelMap model) {
+    public String createTicket(@RequestParam String title, @RequestParam String email, @RequestParam String queue,
+                              @RequestParam String state, @RequestParam String priority, @RequestParam String subject,
+                              @RequestParam String body, ModelMap model) {
 
         //OTLADKA DLYA STRANICI successCreate
         model.addAttribute("title",title);
@@ -66,12 +52,34 @@ public class CreationController {
         //OTLADKA DLYA STRANICI successCreate
 
         //JSON PROPERTIES SETTERS BEGIN
+        //Создаем новый экземпляр класса
 
-        ticketCreate.setTitle(title);
-        ticketCreate.setEmail(email);
-        ticketCreate.setPriority(priority);
-        ticketCreate.setSubject(subject);
-        ticketCreate.setBody(body);
+
+        //
+
+
+
+
+
+        Ticket ticket = new Ticket();
+      ticket.setUserLogin("wow.timur@yandex.ru");
+        ticket.setPassword("12345");
+        ticket.setTitle("title");
+        ticket.setCustomerUser("wow.timur@yandex.ru");
+        ticket.setQueue("Junk");
+        ticket.setState("open");
+        ticket.setPriority("3 normal");
+Article article = new Article();
+        article.setSubject("@JsonProperty testing");
+        article.setBody("Success");
+        article.setContentType("text/plain; charset=utf8");
+
+        TicketCreate ticketCreate=new TicketCreate();
+        ticketCreate.setTicket(ticket);
+        ticketCreate.setArticle(article);
+
+        //
+
 
         //JSON PROPERTIES SETTERS END
 
@@ -84,12 +92,17 @@ public class CreationController {
                 .queryParam("Password","12345")
                 .build();
         String urlString = uri.toUriString();
-        RestTemplate rt= new RestTemplate();
-        rt.postForObject(urlString,null,TicketCreate.class);
+
+        RestTemplate rt = new RestTemplate();
+
+        String response = rt.postForObject(urlString,ticketCreate,String.class);
+
+
+        System.out.println(response);
 
         //REQUEST END
 
-        model.put("OMG",ticketCreate.getTitle()); //otladka
+        model.put("OMG",response); //otladka
 
        return "successCreate";
     }
