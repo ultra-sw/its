@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Ticket {
 
+
+
     @JsonProperty("UserLogin")
     private String userLogin;
 
@@ -29,6 +31,8 @@ public class Ticket {
 
     @JsonProperty("Priority")
     private String priority;
+
+
 
     public String getPriority() {
         return priority;

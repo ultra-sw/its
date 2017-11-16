@@ -40,6 +40,8 @@
       String sid = (String) ses.getAttribute("session");
       out.println(sid);
       %>
+
+
     </div>
 
 

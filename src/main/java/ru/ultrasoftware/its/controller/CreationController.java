@@ -41,7 +41,11 @@ public class CreationController {
                               @RequestParam String state, @RequestParam String priority, @RequestParam String subject,
                               @RequestParam String body, ModelMap model) {
 
-        //OTLADKA DLYA STRANICI successCreate
+        //GET SESSION ID BEGIN
+        String sessionID = IndexController.sessionID;
+        //GET SESSION ID END
+
+        //OTLADKA DLYA STRANICI successCreate BEGIN
         model.addAttribute("title",title);
         model.addAttribute("email",email);
         model.addAttribute("queue",queue);
@@ -49,60 +53,41 @@ public class CreationController {
         model.addAttribute("priority",priority);
         model.addAttribute("subject",subject);
         model.addAttribute("body",body);
-        //OTLADKA DLYA STRANICI successCreate
+        //OTLADKA DLYA STRANICI successCreate END
 
         //JSON PROPERTIES SETTERS BEGIN
         //Создаем новый экземпляр класса
-
-
-        //
-
-
-
-
-
         Ticket ticket = new Ticket();
-      ticket.setUserLogin("wow.timur@yandex.ru");
-        ticket.setPassword("12345");
-        ticket.setTitle("title");
+        //ticket.setUserLogin("wow.timur@yandex.ru");
+        //ticket.setPassword("12345");
+        ticket.setTitle("@JsonProperty testing TITLE");
         ticket.setCustomerUser("wow.timur@yandex.ru");
         ticket.setQueue("Junk");
         ticket.setState("open");
         ticket.setPriority("3 normal");
-Article article = new Article();
+        Article article = new Article();
         article.setSubject("@JsonProperty testing");
         article.setBody("Success");
         article.setContentType("text/plain; charset=utf8");
-
         TicketCreate ticketCreate=new TicketCreate();
         ticketCreate.setTicket(ticket);
         ticketCreate.setArticle(article);
-
-        //
-
-
         //JSON PROPERTIES SETTERS END
 
         //REQUEST BEGIN
-
        UriComponents uri= UriComponentsBuilder
-
                 .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
-                .queryParam("UserLogin","wow.timur@yandex.ru")
-                .queryParam("Password","12345")
+              //  .queryParam("UserLogin","wow.timur@yandex.ru")
+               // .queryParam("Password","12345")
+               .queryParam("SessionID",sessionID)
                 .build();
         String urlString = uri.toUriString();
-
         RestTemplate rt = new RestTemplate();
-
         String response = rt.postForObject(urlString,ticketCreate,String.class);
-
-
         System.out.println(response);
-
         //REQUEST END
 
-        model.put("OMG",response); //otladka
+        model.put("OMG",response+"SID:"+sessionID); //otladka
 
        return "successCreate";
     }

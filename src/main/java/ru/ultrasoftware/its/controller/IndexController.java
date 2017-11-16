@@ -40,10 +40,13 @@ public class IndexController {
 
         return "login";        
     }
+
+
     @RequestMapping("/out")
     public String out(Map<String, Object> model,HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
+        sessionID="";
         return "login";
     }
     @RequestMapping("/test")
