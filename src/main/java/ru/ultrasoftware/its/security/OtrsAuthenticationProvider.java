@@ -1,5 +1,7 @@
 package ru.ultrasoftware.its.security;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,22 +13,26 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+import ru.ultrasoftware.its.controller.IndexController;
 import ru.ultrasoftware.its.domain.OtrsSession;
 import ru.ultrasoftware.its.domain.OtrsTickets;
 import ru.ultrasoftware.its.domain.OtrsUserInfo;
+import javax.servlet.http.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Component
+
 public class OtrsAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        IndexController.agent = true;
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        boolean ROLE_AGENT = true;
-        //TODO get session id from otrs
+
+        //TODO get session id from otrs1
         UriComponents uri = UriComponentsBuilder
                 .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session")
                 .queryParam("UserLogin", username)
@@ -44,39 +50,41 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
                     .build();
             urlString = uri.toUriString();
             sessionID = restTemplate.postForObject(urlString, null, OtrsSession.class);
-            ROLE_AGENT = false;
+            IndexController.agent = false;
         }
-
+        IndexController.sessionID = sessionID.getSessionId();
         if (sessionID.getSessionId()==null) {
             throw new BadCredentialsException("Incorrect username or password.");
         }
         else{
+
             String url = "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session/" + sessionID.getSessionId();
             OtrsUserInfo userInfo = restTemplate.getForObject(url, OtrsUserInfo.class);
-           /* for (int i = 0; i<userInfo.sessionDataSize(); i++)
-               System.out.println(userInfo.getsessionData(i)); - Вывод массива SessionData*/
+
+            System.out.println(userInfo.getsessionData()); // Получение листа информации о сессии
 
         }
 
         //TODO callSESSION
 
-      /*  String userURL = "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session/" + sessionID.getSessionId();
-        System.out.println(userURL);*/
+
 
        UriComponents tic = UriComponentsBuilder
         		.fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
-        		.queryParam("UserLogin", username)
-                .queryParam("Password", password)
+        		.queryParam("SessionID", sessionID.getSessionId())
         		.build();
         		
 
         String urlTicket = tic.toUriString();
 		System.out.println(sessionID.getSessionId());
 		OtrsTickets tickets = restTemplate.getForObject(urlTicket, OtrsTickets.class);
+        System.out.println(tickets.getTickets());
+        System.out.println();
+      //  System.out.println(sessionID.getSessionId());
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
 
-        if(ROLE_AGENT == true){
+        if(IndexController.agent == true){
         authorities.add(new SimpleGrantedAuthority("ROLE_AGENT"));}
         else
         {
