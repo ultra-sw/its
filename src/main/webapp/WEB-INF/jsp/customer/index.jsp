@@ -27,14 +27,19 @@
         <h1>Система учёта заявок</h1>
         <c:choose>
             <c:when test="${customerInfo == null}">
-                <h2>Message: ${message}</h2>
+                <h2>Message: ${message} КЛИЕНТ</h2>
             </c:when>
             <c:otherwise>
-                <h2>Добро пожаловать, ${customerInfo}</h2>
+                <h2>Добро пожаловать, Клиент ${customerInfo}</h2>
             </c:otherwise>
         </c:choose>
         <% out.println( "Your IP address is " + request.getRemoteAddr()); %>
 	  <p>Today's date: <%= (new java.util.Date()).toLocaleString()%></p>
+    <p>  <%
+             HttpSession ses = request.getSession(false);
+             String sid = (String) ses.getAttribute("session");
+             out.println(sid);
+             %>
     </div>
 
 </div>
