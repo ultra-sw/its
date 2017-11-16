@@ -9,5 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SessionID_Config {
     @Bean
- public SessionID
+ public SessionID sessionID(){
+        return new SessionID();
+    }
 }

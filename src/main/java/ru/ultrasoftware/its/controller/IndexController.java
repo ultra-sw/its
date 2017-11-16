@@ -2,6 +2,8 @@ package ru.ultrasoftware.its.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.ultrasoftware.its.bean.SessionID;
+import ru.ultrasoftware.its.bean.SessionID_Config;
 import ru.ultrasoftware.its.security.OtrsAuthenticationProvider;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +27,7 @@ public class IndexController {
     // inject via application.properties
     @Value("${application.message:Hello World}")
     private String message;
+
 
 
     @RequestMapping("/")
@@ -46,7 +51,8 @@ public class IndexController {
     public String out(Map<String, Object> model,HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
-        sessionID="";
+       sessionID="";
+
         return "login";
     }
     @RequestMapping("/test")

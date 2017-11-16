@@ -16,7 +16,8 @@ import ru.ultrasoftware.its.domain.Ticket;
 import ru.ultrasoftware.its.domain.TicketCreate;
 
 
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -28,8 +29,12 @@ public class CreationController {
 
 
     @RequestMapping("/create")
-    public String create(Map<String,Object> model) {
-        return "create";
+    public String create(Map<String,Object> model,HttpServletRequest request){
+        HttpSession s = request.getSession();
+        if(s.getAttribute("session")!=null){
+        if(IndexController.agent==true)return "agent/create";
+        if(IndexController.agent==false)return "customer/create";}
+        return "login";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
