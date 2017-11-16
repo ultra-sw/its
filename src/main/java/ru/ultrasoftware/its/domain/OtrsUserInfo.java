@@ -8,12 +8,9 @@ public class OtrsUserInfo {
 
     @JsonProperty("SessionData")
     private List sessionData;
-    public Object getsessionData(int i) {
-        return sessionData.get(i);
-    }
 
-    public int sessionDataSize() { ;
-        return sessionData.size();
+    public Object getsessionData() {
+        return sessionData;
     }
 
 }
