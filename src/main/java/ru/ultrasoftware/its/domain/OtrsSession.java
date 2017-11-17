@@ -2,8 +2,6 @@ package ru.ultrasoftware.its.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-
 public class OtrsSession {
 
 

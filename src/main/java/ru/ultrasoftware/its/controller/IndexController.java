@@ -1,13 +1,10 @@
 package ru.ultrasoftware.its.controller;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Locale;
@@ -44,7 +41,7 @@ public class IndexController {
     public String out(Map<String, Object> model,HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
-       sessionID="";
+        sessionID="";
         return "login";
     }
     @RequestMapping("/test")

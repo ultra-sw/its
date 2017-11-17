@@ -1,9 +1,5 @@
 package ru.ultrasoftware.its.security;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,14 +11,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.ultrasoftware.its.bean.SessionID;
-import ru.ultrasoftware.its.bean.SessionID_Config;
 import ru.ultrasoftware.its.controller.IndexController;
 import ru.ultrasoftware.its.domain.OtrsSession;
 import ru.ultrasoftware.its.domain.OtrsTickets;
 import ru.ultrasoftware.its.domain.OtrsUserInfo;
-import javax.servlet.http.*;
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
 

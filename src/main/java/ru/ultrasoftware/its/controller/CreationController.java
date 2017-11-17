@@ -1,5 +1,4 @@
 package ru.ultrasoftware.its.controller;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,11 +74,11 @@ public class CreationController {
         //JSON PROPERTIES SETTERS END
 
         //REQUEST BEGIN
-       UriComponents uri= UriComponentsBuilder
+        UriComponents uri= UriComponentsBuilder
                 .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
               //  .queryParam("UserLogin","wow.timur@yandex.ru")
                // .queryParam("Password","12345")
-               .queryParam("SessionID",sessionID)
+                .queryParam("SessionID",sessionID)
                 .build();
         String urlString = uri.toUriString();
         RestTemplate rt = new RestTemplate();
