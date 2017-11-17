@@ -1,8 +1,5 @@
 package ru.ultrasoftware.its.controller;
 
-
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +11,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.ultrasoftware.its.domain.Article;
 import ru.ultrasoftware.its.domain.Ticket;
 import ru.ultrasoftware.its.domain.TicketCreate;
-
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
