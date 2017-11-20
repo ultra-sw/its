@@ -1,47 +1,59 @@
 package ru.ultrasoftware.its.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import javax.servlet.http.HttpServletRequest;
+import ru.ultrasoftware.its.security.OtrsAuthenticationInfo;
+import ru.ultrasoftware.its.service.SecurityService;
+
 import javax.servlet.http.HttpSession;
 import java.util.Locale;
 import java.util.Map;
 
 @Controller
 public class IndexController {
-    public static String sessionID ="";
     public static boolean agent=true;
     // inject via application.properties
     @Value("${application.message:Hello World}")
     private String message;
 
+    @Autowired
+    HttpSession httpSession;
 
+    @Autowired
+    SecurityService securityService;
 
     @RequestMapping("/")
-    public String login(@RequestParam(value = "error",required = false) String error, Map<String, Object> model,HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String page;
+    public String login(@RequestParam(value = "error",required = false) String error, Map<String, Object> model) {
+        OtrsAuthenticationInfo user = securityService.currentUser();
         model.put("message", this.message);
         System.out.println(agent);
-        if (error != null)
+        if(error != null)
             	 model.put("wrong_text", "Неверное имя пользователя или пароль. Проверьте правильность введённых данных");
-        if(sessionID.length()>1){
-            session.setAttribute("session",sessionID);
-            if(agent==true)return "agent/index";
-            else{return "customer/index";}}
-
-        return "login";        
+        if(user != null) {
+            if(agent == true){
+                return "agent/index";
+            } else {
+                return "customer/index";
+            }
+        }
+        return "login";
     }
 
 
     @RequestMapping("/out")
-    public String out(Map<String, Object> model,HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.invalidate();
-        sessionID="";
+    public String out() {
+        securityService.logout();
+//        OtrsAuthenticationInfo user = securityService.currentUser();
+//        if(user != null) {
+//            httpSession.invalidate();
+//        }
         return "login";
     }
     @RequestMapping("/test")

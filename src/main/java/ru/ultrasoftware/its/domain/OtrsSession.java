@@ -4,12 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OtrsSession {
 
-
-
     @JsonProperty("SessionID")
     private String sessionId;
-
-
 
     public String getSessionId() {
         return sessionId;

@@ -1,4 +1,6 @@
 package ru.ultrasoftware.its.controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ru.ultrasoftware.its.domain.Article;
 import ru.ultrasoftware.its.domain.Ticket;
 import ru.ultrasoftware.its.domain.TicketCreate;
+import ru.ultrasoftware.its.security.OtrsAuthenticationInfo;
+import ru.ultrasoftware.its.service.SecurityService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -21,6 +26,8 @@ import java.util.Map;
 
 public class CreationController {
 
+    @Autowired
+    SecurityService securityService;
 
     @RequestMapping("/create")
     public String create(Map<String,Object> model,HttpServletRequest request){
@@ -36,12 +43,17 @@ public class CreationController {
         @RequestParam - указываем, что данный аргумент метода, является значение с формы с именем как название аргумент в java.
         author, text - приходят значения из input тегов.
      */
-    public String createTicket(@RequestParam String title, @RequestParam String email, @RequestParam String queue,
-                              @RequestParam String state, @RequestParam String priority, @RequestParam String subject,
-                              @RequestParam String body, ModelMap model) {
+    public String createTicket(@RequestParam String title,
+                               @RequestParam String email,
+                               @RequestParam String queue,
+                               @RequestParam String state,
+                               @RequestParam String priority,
+                               @RequestParam String subject,
+                               @RequestParam String body,
+                               ModelMap model) {
 
         //GET SESSION ID BEGIN
-        String sessionID = IndexController.sessionID;
+        String sessionID = securityService.currentUser().getSessionId();
         //GET SESSION ID END
 
         //OTLADKA DLYA STRANICI successCreate BEGIN
