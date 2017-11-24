@@ -1,5 +1,8 @@
 package ru.ultrasoftware.its.service;
 
+import ru.ultrasoftware.its.security.OtrsAuthenticationInfo;
+
 public interface SecurityService {
-    String authorize(String username, String password);
+    OtrsAuthenticationInfo currentUser();
+    void logout();
 }

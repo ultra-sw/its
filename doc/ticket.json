@@ -1,0 +1,67 @@
+{
+  "TicketCreate": {
+    "UserLogin": "wow.timur@yandex.ru",
+    "CustomerUserLogin": "",
+    "SessionID": "",
+    "Password": "12345",
+    "Ticket": {
+      "Title": "title",
+      "QueueID": "3",
+      "Queue": "junk",
+      "TypeID": "",
+      "Type": "",
+      "ServiceID": "",
+      "Service": "",
+      "SLAID": "",
+      "SLA": "",
+      "StateID": "",
+      "State": "",
+      "PriorityID": "",
+      "Priority": "",
+      "OwnerID": "",
+      "Owner": "",
+      "ResponsibleID": "",
+      "Responsible": "",
+      "CustomerUser": "",
+      "CustomerID": "",
+      "PendingTime": {
+        "Diff": "",
+        "Year": "2017",
+        "Month": "11",
+        "Day": "1",
+        "Hour": "15",
+        "Minute": "00"
+      }
+    },
+    "Article": {
+      "CommunicationChannelID": "?",
+      "CommunicationChannel": "?",
+      "IsVisibleForCustomer": "?",
+      "SenderTypeID": "?",
+      "SenderType": "?",
+      "From": "?",
+      "Subject": "TEST SUBJ",
+      "Body": "?",
+      "ContentType": "?",
+      "Charset": "?",
+      "MimeType": "?",
+      "HistoryType": "?",
+      "HistoryComment": "?",
+      "AutoResponseType": "?",
+      "TimeUnit": "?",
+      "NoAgentNotify": "?",
+      "ForceNotificationToUserID": "?",
+      "ExcludeNotificationToUserID": "?",
+      "ExcludeMuteNotificationToUserID": "?"
+    },
+    "DynamicField": {
+      "Name": "?",
+      "Value": "?"
+    },
+    "Attachment": {
+      "Content": "cid:61886944659",
+      "ContentType": "?",
+      "Filename": "?"
+    }
+  }
+}
