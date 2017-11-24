@@ -31,15 +31,13 @@
 
 <br>
 <br>
-${pwmn3}
 
-sss : ${OMG} :
 
 <br>
 <form action="/create" method="post">
                 <p><input type="text" name="title" value="" placeholder="Заголовок"></p>
-                <p><input type="text" name="email" value="" placeholder="e-mail"></p>
-                Очередь:
+                <p><input type="text" name="email" value="" placeholder="e-mail адрес клиента"></p>
+
 
                 <p><select size="5" name="queue">
                 <option disabled>Выберите очередь</option>
@@ -47,16 +45,20 @@ sss : ${OMG} :
                  <option value="Junk">Junk</option>
                   <option value="Misc">Misc</option>
                    <option value="Postmaster">Postmaster</option>
-                </select></p>
-
-                Состояние:
-                <p><input type="radio" name="state" value="close">Закрыта</p>
-                <p><input type="radio" name="state" value="open" checked>Открыта</p>
-                <p><input type="text" name="priority" value="" placeholder="Приоритет"></p>
+                </select>
 
 
-                <br>
-                <br>
+                <select size="5" name="priority">
+                <option disabled>Выберите приоритет</option>
+                <option value="1 very low">Ничтожный</option>
+                <option value="2 low">Низкий</option>
+                <option value="3 normal">Обычный</option>
+                <option value="4 high">Высокий</option>
+                <option value="5 very high">Неотложный</option>
+                </select> </p>
+                Состояние заявки:
+                                   Закрыта <input type="radio" name="state" value="close">
+                                    <input type="radio" name="state" value="open" checked> Открыта </p>
 
                 <p><input type="text" name="subject" value="" placeholder="Тема"></p>
                 <p><input type="text" name="body" value="" placeholder="Текст заявки"></p>
@@ -65,7 +67,7 @@ sss : ${OMG} :
                    <font color=red>${wrong_text}</font>
                 </label>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <p class="submit"><input type="submit" name="enter" value="Создать новую заявку"></p>
+                <p class="submit"><input type="submit" name="enterCustomer" value="Создать новую заявку"></p>
             </form>
 </div>
 
