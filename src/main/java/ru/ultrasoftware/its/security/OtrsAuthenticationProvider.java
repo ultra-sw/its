@@ -1,5 +1,6 @@
 package ru.ultrasoftware.its.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,11 +16,13 @@ import ru.ultrasoftware.its.controller.IndexController;
 import ru.ultrasoftware.its.domain.OtrsSession;
 import ru.ultrasoftware.its.domain.OtrsTickets;
 import ru.ultrasoftware.its.domain.OtrsUserInfo;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Component
-
 public class OtrsAuthenticationProvider implements AuthenticationProvider {
 
     @Override
@@ -36,27 +39,25 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
                 .build();
         String urlString = uri.toUriString();
         RestTemplate restTemplate = new RestTemplate();
-        OtrsSession sessionID = restTemplate.postForObject(urlString, null, OtrsSession.class);
+        OtrsSession otrsSession = restTemplate.postForObject(urlString, null, OtrsSession.class);
 
-        if(sessionID.getSessionId()==null){
+        if(otrsSession.getSessionId()==null){
             uri = UriComponentsBuilder
                     .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session")
                     .queryParam("CustomerUserLogin", username)
                     .queryParam("Password", password)
                     .build();
             urlString = uri.toUriString();
-            sessionID = restTemplate.postForObject(urlString, null, OtrsSession.class);
+            otrsSession = restTemplate.postForObject(urlString, null, OtrsSession.class);
             IndexController.agent = false;
         }
-        IndexController.sessionID = sessionID.getSessionId();
 
-
-        if (sessionID.getSessionId()==null) {
+        if (otrsSession.getSessionId()==null) {
             throw new BadCredentialsException("Incorrect username or password.");
         }
         else{
 
-            String url = "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session/" + sessionID.getSessionId();
+            String url = "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session/" + otrsSession.getSessionId();
             OtrsUserInfo userInfo = restTemplate.getForObject(url, OtrsUserInfo.class);
 
             System.out.println(userInfo.getsessionData()); // Получение листа информации о сессии
@@ -69,12 +70,12 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
 
        UriComponents tic = UriComponentsBuilder
         		.fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
-        		.queryParam("SessionID", sessionID.getSessionId())
+        		.queryParam("SessionID", otrsSession.getSessionId())
         		.build();
         		
 
         String urlTicket = tic.toUriString();
-		System.out.println(sessionID.getSessionId());
+		System.out.println(otrsSession.getSessionId());
 		OtrsTickets tickets = restTemplate.getForObject(urlTicket, OtrsTickets.class);
         System.out.println(tickets.getTickets());
         System.out.println();
@@ -82,13 +83,14 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
 
-        if(IndexController.agent == true){
-        authorities.add(new SimpleGrantedAuthority("ROLE_AGENT"));}
-        else
-        {
+        if(IndexController.agent == true) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_AGENT"));
+        } else {
             authorities.add(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
         }
-        return new UsernamePasswordAuthenticationToken(username, password, authorities);
+
+        return new UsernamePasswordAuthenticationToken(new OtrsAuthenticationInfo(otrsSession.getSessionId(),
+                username), authentication.getCredentials(), authorities);
     }
 
     @Override
