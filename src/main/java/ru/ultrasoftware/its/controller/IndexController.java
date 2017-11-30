@@ -30,10 +30,13 @@ public class IndexController {
     SecurityService securityService;
 
     @RequestMapping("/")
-    public String login(@RequestParam(value = "error",required = false) String error, Map<String, Object> model) {
+    public String login(@RequestParam(value = "error",required = false) String error,@RequestParam(value="out",required = false) String out, Map<String, Object> model) {
         OtrsAuthenticationInfo user = securityService.currentUser();
         model.put("message", this.message);
         System.out.println(agent);
+        if(out!=null){
+            securityService.logout();
+        }
         if(error != null)
             	 model.put("wrong_text", "Неверное имя пользователя или пароль. Проверьте правильность введённых данных");
         if(user != null) {
@@ -47,7 +50,7 @@ public class IndexController {
     }
 
 
-    @RequestMapping("/out")
+/*    @RequestMapping(value="/", method= RequestMethod.POST)
     public String out() {
         securityService.logout();
 //        OtrsAuthenticationInfo user = securityService.currentUser();
@@ -55,7 +58,7 @@ public class IndexController {
 //            httpSession.invalidate();
 //        }
         return "login";
-    }
+    }*/
     @RequestMapping("/test")
     public String test(Map<String, Object> model) {
         model.put("message", this.message);
