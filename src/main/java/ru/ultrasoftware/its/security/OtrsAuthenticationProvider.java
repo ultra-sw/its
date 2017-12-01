@@ -1,6 +1,5 @@
 package ru.ultrasoftware.its.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,11 +13,9 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.ultrasoftware.its.controller.IndexController;
 import ru.ultrasoftware.its.domain.OtrsSession;
-import ru.ultrasoftware.its.domain.OtrsTickets;
+import ru.ultrasoftware.its.domain.OtrsUserTickets;
 import ru.ultrasoftware.its.domain.OtrsUserInfo;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -76,8 +73,8 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
 
         String urlTicket = tic.toUriString();
 		System.out.println(otrsSession.getSessionId());
-		OtrsTickets tickets = restTemplate.getForObject(urlTicket, OtrsTickets.class);
-        System.out.println(tickets.getTickets());
+		OtrsUserTickets tickets = restTemplate.getForObject(urlTicket, OtrsUserTickets.class);
+        System.out.println(tickets.getTicketIds());
         System.out.println();
       //  System.out.println(sessionID.getSessionId());
 

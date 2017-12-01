@@ -9,7 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Ticket {
 
-
+    //@JsonProperty("ID") или как он там называется
+    private Integer id;
 
     @JsonProperty("UserLogin")
     private String userLogin;
@@ -91,4 +92,11 @@ public class Ticket {
     }
 
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

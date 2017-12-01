@@ -1,26 +1,20 @@
 package ru.ultrasoftware.its.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.ultrasoftware.its.domain.OtrsTickets;
-import ru.ultrasoftware.its.security.OtrsAuthenticationInfo;
+import ru.ultrasoftware.its.domain.OtrsUserTickets;
+import ru.ultrasoftware.its.domain.Ticket;
 import ru.ultrasoftware.its.service.SecurityService;
-import javax.servlet.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -30,18 +24,26 @@ public class CustomerTicketController {
     SecurityService securityService;
 
     @RequestMapping("/customer/tickets")
-    public String tickets(Map<String, Object> model, HttpServletRequest request,HttpServletResponse response) {
-        HttpSession s = request.getSession();
-
-        UriComponents uri = UriComponentsBuilder
-                .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
-                .queryParam("SessionID", securityService.currentUser().getSessionId() )
-                .build();
+    public ModelAndView tickets(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
+        UriComponents uri = UriComponentsBuilder.fromHttpUrl(
+                "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
+                .queryParam("SessionID", securityService.currentUser().getSessionId()).build();
         String urlString = uri.toUriString();
         RestTemplate restTemplate = new RestTemplate();
-        OtrsTickets otrsTickets = restTemplate.getForObject(urlString, OtrsTickets.class);
+        OtrsUserTickets otrsUserTickets = restTemplate.getForObject(urlString, OtrsUserTickets.class);
 
-        request.setAttribute("Tickets", otrsTickets.getTickets());
+        List<Ticket> tickets = new ArrayList<Ticket>(otrsUserTickets.getTicketIds().size());
+        for(Integer ticketId : otrsUserTickets.getTicketIds()) {
+            //TODO тут нужно получить тикет по его id. Пока просто создам его тут.
+            Ticket ticket = new Ticket();
+            ticket.setId(ticketId);
+            ticket.setTitle("Тикет " + ticketId);
+            ticket.setState("Состояние " + ticketId);
+            tickets.add(ticket);
+        }
+        ModelAndView mv = new ModelAndView("/customer/tickets");
+        mv.addObject("tickets", tickets);
 
-        return "/customer/tickets";
-    }}
+        return mv;
+    }
+}

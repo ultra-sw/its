@@ -4,13 +4,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class OtrsTickets {
+public class OtrsUserTickets {
 
     @JsonProperty("TicketID")
-    private List tickets;
+    private List<Integer> ticketIds;
 
-    public List getTickets() {
-        return tickets;
+    public List<Integer> getTicketIds() {
+        return ticketIds;
     }
 
 }
