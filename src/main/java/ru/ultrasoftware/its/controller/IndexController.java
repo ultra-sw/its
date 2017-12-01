@@ -47,14 +47,14 @@ public class IndexController {
     }
 
 
-    @RequestMapping("/out")
+   @RequestMapping(value="/out",method = RequestMethod.GET)
     public String out() {
         securityService.logout();
 //        OtrsAuthenticationInfo user = securityService.currentUser();
 //        if(user != null) {
 //            httpSession.invalidate();
 //        }
-        return "login";
+        return "redirect:/";
     }
     @RequestMapping("/test")
     public String test(Map<String, Object> model) {
