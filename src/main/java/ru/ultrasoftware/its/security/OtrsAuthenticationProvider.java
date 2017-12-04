@@ -59,9 +59,7 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
 
             String url = "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session/" + otrsSession.getSessionId();
             OtrsUserInfo userInfo = restTemplate.getForObject(url, OtrsUserInfo.class);
-
-            System.out.println(userInfo.getsessionData()); // Получение листа информации о сессии
-
+            System.out.print(userInfo.getSessionDataMap());
         }
 
         //TODO callSESSION
