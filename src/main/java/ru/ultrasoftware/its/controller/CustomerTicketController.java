@@ -7,16 +7,23 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+import ru.ultrasoftware.its.domain.Content;
 import ru.ultrasoftware.its.domain.OtrsUserTickets;
 import ru.ultrasoftware.its.domain.Ticket;
+import ru.ultrasoftware.its.domain.TicketInfo;
 import ru.ultrasoftware.its.service.SecurityService;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonParseException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 @Controller
 public class CustomerTicketController {
 
@@ -24,20 +31,32 @@ public class CustomerTicketController {
     SecurityService securityService;
 
     @RequestMapping("/customer/tickets")
-    public ModelAndView tickets(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView tickets(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws IOException {
         UriComponents uri = UriComponentsBuilder.fromHttpUrl(
                 "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
                 .queryParam("SessionID", securityService.currentUser().getSessionId()).build();
         String urlString = uri.toUriString();
         RestTemplate restTemplate = new RestTemplate();
         OtrsUserTickets otrsUserTickets = restTemplate.getForObject(urlString, OtrsUserTickets.class);
-
         List<Ticket> tickets = new ArrayList<Ticket>(otrsUserTickets.getTicketIds().size());
+
+
         for(Integer ticketId : otrsUserTickets.getTicketIds()) {
             //TODO тут нужно получить тикет по его id. Пока просто создам его тут.
+            uri = UriComponentsBuilder.fromHttpUrl(
+                    "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket/" + ticketId)
+                    .queryParam("SessionID", securityService.currentUser().getSessionId()).build();
+            urlString = uri.toUriString();
+            TicketInfo ticketInf = restTemplate.getForObject(urlString, TicketInfo.class);
+            System.out.println(ticketInf.getTicketInf().toString()); // Вывод листа с полями заявки ("=" ?)
+
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+            Content ticket1 = mapper.readValue(ticketInf.getTicketInf().toString(), Content.class);
+
             Ticket ticket = new Ticket();
             ticket.setId(ticketId);
-            ticket.setTitle("Тикет " + ticketId);
+            ticket.setTitle(ticket1.getTitle());
             ticket.setState("Состояние " + ticketId);
             tickets.add(ticket);
         }
