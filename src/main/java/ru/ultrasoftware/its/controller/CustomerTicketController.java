@@ -42,24 +42,20 @@ public class CustomerTicketController {
 
 
         for(Integer ticketId : otrsUserTickets.getTicketIds()) {
-            //TODO тут нужно получить тикет по его id. Пока просто создам его тут.
             uri = UriComponentsBuilder.fromHttpUrl(
                     "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket/" + ticketId)
                     .queryParam("SessionID", securityService.currentUser().getSessionId()).build();
             urlString = uri.toUriString();
             TicketInfo ticketInf = restTemplate.getForObject(urlString, TicketInfo.class);
-            System.out.println(ticketInf.getTicketInf().toString()); // Вывод листа с полями заявки ("=" ?)
-
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
-            Content ticket1 = mapper.readValue(ticketInf.getTicketInf().toString(), Content.class);
-
-            Ticket ticket = new Ticket();
-            ticket.setId(ticketId);
-            ticket.setTitle(ticket1.getTitle());
-            ticket.setState("Состояние " + ticketId);
-            tickets.add(ticket);
-        }
+            if(!ticketInf.getTicketInf().isEmpty()) {
+                Content ticket1 = ticketInf.getTicketInf().get(0);
+                Ticket ticket = new Ticket();
+                ticket.setId(ticketId);
+                ticket.setTitle(ticket1.getTitle());
+                ticket.setState(ticket1.getState());
+                ticket.setCreated(ticket1.getCreated());
+                tickets.add(ticket);
+            }}
         ModelAndView mv = new ModelAndView("/customer/tickets");
         mv.addObject("tickets", tickets);
 
