@@ -7,10 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TicketInfo {
 
     @JsonProperty("Ticket")
-    private List<Object> ticketInf;
+    private List<Content> ticketInf;
 
 
-    public List<Object> getTicketInf() {
+    public List<Content> getTicketInf() {
         return ticketInf;
     }
 
