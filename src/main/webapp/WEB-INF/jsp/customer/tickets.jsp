@@ -32,7 +32,7 @@
                 <tr>
                     <td>${ticket.id}</td>
                     <td>${ticket.title}</td>
-                    <td>---</td>
+                    <td>${ticket.created}</td>
                     <td>${ticket.state}</td>
                 </tr>
             </c:forEach>
