@@ -6,190 +6,186 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Content {
     @JsonProperty("EscalationSolutionTime")
-    private Integer EscalationSolutionTime;
+    private Integer escalationSolutionTime;
     @JsonProperty("CreateBy")
-    private String CreateBy;
+    private String createBy;
     @JsonProperty("Priority")
-    private String Priority;
+    private String priority;
     @JsonProperty("CustomerID")
-    private Integer CustomerID;
+    private String customerID;
     @JsonProperty("ResponsibleID")
-    private Integer ResponsibleID;
+    private Integer responsibleID;
     @JsonProperty("TicketID")
-    private Integer TicketID;
+    private Integer ticketID;
     @JsonProperty("RealTillTimeNotUsed")
-    private Integer RealTillTimeNotUsed;
+    private Integer realTillTimeNotUsed;
     @JsonProperty("EscalationUpdateTime")
-    private Integer EscalationUpdateTime;
+    private Integer escalationUpdateTime;
     @JsonProperty("EscalationResponseTime")
-    private Integer EscalationResponseTime;
+    private Integer escalationResponseTime;
     @JsonProperty("TypeID")
-    private Integer TypeID;
+    private Integer typeID;
     @JsonProperty("UntilTime")
-    private String UntilTime;
+    private String untilTime;
     @JsonProperty("PriorityID")
-    private Integer PriorityID;
+    private Integer priorityID;
     @JsonProperty("Created")
-    private String Created;
+    private String created;
     @JsonProperty("QueueID")
-    private Integer QueueID;
+    private Integer queueID;
     @JsonProperty("OwnerID")
-    private Integer OwnerID;
+    private Integer ownerID;
     @JsonProperty("ArchiveFlag")
-    private String ArchiveFlag;
+    private String archiveFlag;
     @JsonProperty("EscalationTime")
-    private String EscalationTime;
+    private String escalationTime;
     @JsonProperty("Owner")
-    private String Owner;
+    private String owner;
     @JsonProperty("SLAID")
-    private String SLAID;
+    private String slaid;
     @JsonProperty("TimeUnit")
-    private String TimeUnit;
+    private String timeUnit;
     @JsonProperty("LockID")
-    private String LockID;
+    private String lockID;
     @JsonProperty("CustomerUserID")
-    private String CustomerUserID;
+    private String customerUserID;
     @JsonProperty("StateID")
-    private String StateID;
+    private String stateID;
     @JsonProperty("GroupID")
-    private String GroupID;
+    private String groupID;
     @JsonProperty("UnlockTimeout")
-    private String UnlockTimeout;
+    private String unlockTimeout;
     @JsonProperty("ServiceID")
-    private String ServiceID;
+    private String serviceID;
     @JsonProperty("State")
-    private String State;
+    private String state;
     @JsonProperty("Lock")
-    private String Lock;
+    private String lock;
     @JsonProperty("Type")
-    private String Type;
+    private String type;
     @JsonProperty("Responsible")
-    private String Responsible;
+    private String responsible;
     @JsonProperty("ChangeBy")
-    private String ChangeBy;
+    private String changeBy;
     @JsonProperty("StateType")
-    private String StateType;
+    private String stateType;
     @JsonProperty("Queue")
-    private String Queue;
+    private String queue;
     @JsonProperty("Changed")
-    private String Changed;
+    private String changed;
     @JsonProperty("TicketNumber")
-    private String TicketNumber;
+    private String ticketNumber;
     @JsonProperty("Title")
-    private String Title;
+    private String title;
     @JsonProperty("Age")
-    private String Age;
+    private String age;
 
     public Integer getEscalationSolutionTime() {
-        return EscalationSolutionTime;
+        return escalationSolutionTime;
     }
     public String getCreateBy() {
-        return CreateBy;
+        return createBy;
     }
     public String getPriority() {
-        return Priority;
+        return priority;
     }
-    public Integer getCustomerID() {
-        return CustomerID;
-    }
+    public String getCustomerID() {return customerID;}
     public Integer getResponsibleID() {
-        return ResponsibleID;
+        return responsibleID;
     }
     public Integer getRealTillTimeNotUsed() {
-        return RealTillTimeNotUsed;
+        return realTillTimeNotUsed;
     }
     public Integer getEscalationUpdateTime() {
-        return EscalationUpdateTime;
+        return escalationUpdateTime;
     }
     public Integer getEscalationResponseTime() {
-        return EscalationResponseTime;
+        return escalationResponseTime;
     }
     public Integer getTypeID() {
-        return TypeID;
+        return typeID;
     }
     public String getArchiveFlag() {
-        return ArchiveFlag;
+        return archiveFlag;
     }
     public String getUntilTime() {
-        return UntilTime;
+        return untilTime;
     }
     public Integer getPriorityID() {
-        return PriorityID;
+        return priorityID;
     }
     public String getCreated() {
-        return Created;
+        return created;
     }
     public Integer getQueueID() {
-        return QueueID;
+        return queueID;
     }
     public Integer getOwnerID() {
-        return OwnerID;
+        return ownerID;
     }
     public String geEscalationTime() {
-        return EscalationTime;
+        return escalationTime;
     }
     public String getOwner() {
-        return Owner;
+        return owner;
     }
     public String getSLAID() {
-        return SLAID;
+        return slaid;
     }
     public String getUnlockTimeout() {
-        return UnlockTimeout;
+        return unlockTimeout;
     }
     public String getLockID() {
-        return LockID;
+        return lockID;
     }
-    public String getCustomerUserID() {
-        return CustomerUserID;
-    }
+    public String getCustomerUserID() { return customerUserID; }
     public String getStateID() {
-        return StateID;
+        return stateID;
     }
     public String getGroupID() {
-        return GroupID;
+        return groupID;
     }
     public String getTimeUnit() {
-        return TimeUnit;
+        return timeUnit;
     }
     public String getServiceID() {
-        return ServiceID;
+        return serviceID;
     }
     public String getLock() {
-        return Lock;
+        return lock;
     }
     public String getState() {
-        return State;
+        return state;
     }
     public String getType() {
-        return Type;
+        return type;
     }
     public String getResponsible() {
-        return Responsible;
+        return responsible;
     }
     public String getChangeBy() {
-        return ChangeBy;
+        return changeBy;
     }
     public String getStateType() {
-        return StateType;
+        return stateType;
     }
     public String getQueue() {
-        return Queue;
+        return queue;
     }
     public String getChanged() {
-        return Changed;
+        return changed;
     }
     public String getTicketNumber() {
-        return TicketNumber;
+        return ticketNumber;
     }
     public String getTitle() {
-        return Title;
+        return title;
     }
     public String getAge() {
-        return Age;
+        return age;
     }
     public Integer getTicketID() {
-        return TicketID;
+        return ticketID;
     }
 
 }
