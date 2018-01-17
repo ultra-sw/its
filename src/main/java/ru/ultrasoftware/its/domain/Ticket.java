@@ -33,7 +33,8 @@ public class Ticket {
     @JsonProperty("Priority")
     private String priority;
 
-
+    @JsonProperty("Created")
+    private String created;
 
     public String getPriority() {
         return priority;
@@ -41,6 +42,14 @@ public class Ticket {
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
     }
 
     public String getState() {
