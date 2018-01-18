@@ -33,8 +33,8 @@ public class CreationController {
     public String create(Map<String, Object> model, HttpServletRequest request) {
         HttpSession s = request.getSession();
         if (securityService.currentUser().getSessionId() != null) {
-            if (securityService.currentUser().getRoleAgent()) return "agent/create";
-            if (securityService.currentUser().getRoleAgent()) return "customer/create";
+            if (securityService.currentUser().getRoleAgent()==true) return "agent/create";
+            if (securityService.currentUser().getRoleAgent()==false) return "customer/create";
         }
         return "login";
     }
