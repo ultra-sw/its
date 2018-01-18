@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<jsp:directive.include file="/WEB-INF/jspf/head.jspf" />
+<jsp:directive.include file="/WEB-INF/jspf/agent_head.jspf" />
 
 <div class="container">
 
