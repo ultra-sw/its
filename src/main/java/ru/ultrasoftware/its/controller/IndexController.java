@@ -18,7 +18,6 @@ import java.util.Map;
 
 @Controller
 public class IndexController {
-    public static boolean agent=true;
     // inject via application.properties
     @Value("${application.message:Hello World}")
     private String message;
@@ -33,11 +32,10 @@ public class IndexController {
     public String login(@RequestParam(value = "error",required = false) String error, Map<String, Object> model) {
         OtrsAuthenticationInfo user = securityService.currentUser();
         model.put("message", this.message);
-        System.out.println(agent);
         if(error != null)
             	 model.put("wrong_text", "Неверное имя пользователя или пароль. Проверьте правильность введённых данных");
         if(user != null) {
-            if(agent == true){
+            if(securityService.currentUser().getRoleAgent() == true){
                 return "agent/index";
             } else {
                 return "customer/index";

@@ -9,7 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Ticket {
 
-
+    //@JsonProperty("ID") или как он там называется
+    private Integer id;
 
     @JsonProperty("UserLogin")
     private String userLogin;
@@ -32,7 +33,8 @@ public class Ticket {
     @JsonProperty("Priority")
     private String priority;
 
-
+    @JsonProperty("Created")
+    private String created;
 
     public String getPriority() {
         return priority;
@@ -40,6 +42,14 @@ public class Ticket {
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
     }
 
     public String getState() {
@@ -91,4 +101,11 @@ public class Ticket {
     }
 
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
