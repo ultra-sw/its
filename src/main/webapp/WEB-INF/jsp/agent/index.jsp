@@ -17,7 +17,9 @@
 </head>
 <body>
 
-<jsp:directive.include file="/WEB-INF/jspf/head.jspf" />
+
+<jsp:directive.include file="/WEB-INF/jspf/agent_head.jspf" />
+
 <div class="container">
     <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-5">
         <h1>Система учёта заявок</h1>

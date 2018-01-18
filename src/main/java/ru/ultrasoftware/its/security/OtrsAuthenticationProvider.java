@@ -1,6 +1,5 @@
 package ru.ultrasoftware.its.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,11 +13,9 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.ultrasoftware.its.controller.IndexController;
 import ru.ultrasoftware.its.domain.OtrsSession;
-import ru.ultrasoftware.its.domain.OtrsTickets;
+import ru.ultrasoftware.its.domain.OtrsUserTickets;
 import ru.ultrasoftware.its.domain.OtrsUserInfo;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -27,7 +24,7 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        IndexController.agent = true;
+        boolean roleAgent = true;
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
@@ -49,7 +46,7 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
                     .build();
             urlString = uri.toUriString();
             otrsSession = restTemplate.postForObject(urlString, null, OtrsSession.class);
-            IndexController.agent = false;
+            roleAgent = false;
         }
 
         if (otrsSession.getSessionId()==null) {
@@ -74,21 +71,18 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
 
         String urlTicket = tic.toUriString();
 		System.out.println(otrsSession.getSessionId());
-		OtrsTickets tickets = restTemplate.getForObject(urlTicket, OtrsTickets.class);
-        System.out.println(tickets.getTickets());
-        System.out.println();
-      //  System.out.println(sessionID.getSessionId());
+		OtrsUserTickets tickets = restTemplate.getForObject(urlTicket, OtrsUserTickets.class);
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-
-        if(IndexController.agent == true) {
+       
+        if(roleAgent == true) {
             authorities.add(new SimpleGrantedAuthority("ROLE_AGENT"));
         } else {
             authorities.add(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
         }
 
         return new UsernamePasswordAuthenticationToken(new OtrsAuthenticationInfo(otrsSession.getSessionId(),
-                username), authentication.getCredentials(), authorities);
+                username, roleAgent), authentication.getCredentials(), authorities);
     }
 
     @Override
