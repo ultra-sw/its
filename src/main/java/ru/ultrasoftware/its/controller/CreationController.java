@@ -34,7 +34,7 @@ public class CreationController {
         HttpSession s = request.getSession();
         if (securityService.currentUser().getSessionId() != null) {
             if (securityService.currentUser().getRoleAgent()==true) return "agent/create";
-            if (securityService.currentUser().getRoleAgent()==false) return "customer/create";
+            else return "customer/create";
         }
         return "login";
     }
