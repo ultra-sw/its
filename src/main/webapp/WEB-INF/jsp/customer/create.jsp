@@ -20,7 +20,7 @@
 <body>
 <center>
 
-<jsp:directive.include file="/WEB-INF/jspf/head.jspf" />
+<jsp:directive.include file="/WEB-INF/jspf/customer_head.jspf" />
 
 <div class="container">
 
