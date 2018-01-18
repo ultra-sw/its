@@ -7,7 +7,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class=""><a href="/create">[Создать новую заявку]</a></li>
-				<li class=""><a href="/customer/tickets">[Мои заявки]</a></li>
+				<li class=""><a href="/agent/tickets">[Мои заявки]</a></li>
                 <li class=""><a href="/out">Выйти</a></li>
                 <li><a href="#about">Справка</a></li>
             </ul>
