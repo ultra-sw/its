@@ -5,19 +5,6 @@ textarea{
   max-width: 100%;
   min-width: 100%
 }
-
-  TABLE {
-     border-collapse: collapse; /* Убираем двойные линии между ячейками */
-     width: 300px; /* Ширина таблицы */
-    }
-    TH, TD {
-     border: 1px solid black; /* Параметры рамки */
-     text-align: center; /* Выравнивание по центру */
-     padding: 4px; /* Поля вокруг текста */
-    }
-    TH {
-     background: #fc0; /* Цвет фона ячейки */
-     vertical-align: center; /* Выравнивание по нижнему краю */
-     padding: 0; /* Убираем поля вокруг текста */
-    }
-
+table {
+  white-space: nowrap
+}

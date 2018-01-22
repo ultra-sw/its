@@ -18,9 +18,10 @@
 
 </head>
 <body>
-<jsp:directive.include file="/WEB-INF/jspf/agent_head.jspf"/>
-<center>
-    <table>
+<jsp:directive.include file="/WEB-INF/jspf/customer_head.jspf"/>
+<div class="container">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-5">
+    <table class="table table-bordered">
         <tr>
             <th>ID</th>
             <th>Тема заявки</th>
@@ -38,9 +39,8 @@
             </c:forEach>
         </c:if>
     </table>
-
-</center>
-
+    </div>
+</div>
 
 <script type="text/javascript" src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 
