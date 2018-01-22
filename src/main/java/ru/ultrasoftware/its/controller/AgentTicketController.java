@@ -56,7 +56,7 @@ public class AgentTicketController {
                 ticket.setCreated(ticket1.getCreated());
                 tickets.add(ticket);
             }}
-        ModelAndView mv = new ModelAndView("/customer/tickets");
+        ModelAndView mv = new ModelAndView("/agent/tickets");
         mv.addObject("tickets", tickets);
 
         return mv;
