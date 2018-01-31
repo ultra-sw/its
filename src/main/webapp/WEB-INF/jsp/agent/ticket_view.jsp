@@ -20,155 +20,155 @@
 <body>
 <jsp:directive.include file="/WEB-INF/jspf/agent_head.jspf"/>
 
-<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-5">
+<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
     <h1>Просмотр заявки</h1>
     <table class="table table-bordered">
         <tr>
-            <td>escalationSolutionTime</td>
+            <td>Расширение времени выполнения</td>
             <td>${escalationSolutionTime}</td>
         </tr>
         <tr>
-            <td>createBy</td>
+            <td>Создан</td>
             <td>${createBy}</td>
         </tr>
         <tr>
-            <td>priority</td>
+            <td>Приоритет</td>
             <td>${priority}</td>
         </tr>
         <tr>
-            <td>customerID</td>
+            <td>Идентификатор клиента</td>
             <td>${customerID}</td>
         </tr>
         <tr>
-            <td>responsibleID</td>
+            <td>Идентификатор ответственного</td>
             <td>$responsibleID{}</td>
         </tr>
         <tr>
-            <td>realTillTimeNotUsed</td>
+            <td>В данное время не используется</td>
             <td>${realTillTimeNotUsed}</td>
         </tr>
         <tr>
-            <td>escalationUpdateTime</td>
+            <td>Расширение времени обновления</td>
             <td>${escalationUpdateTime}</td>
         </tr>
         <tr>
-            <td>escalationResponseTime</td>
+            <td>Расширение времени ответа</td>
             <td>${escalationResponseTime}</td>
         </tr>
         <tr>
-            <td>typeID</td>
+            <td>Идентификатор типа</td>
             <td>${typeID}</td>
         </tr>
         <tr>
-            <td>archiveFlag</td>
+            <td>В архиве</td>
             <td>${archiveFlag}</td>
         </tr>
         <tr>
-            <td>untilTime</td>
+            <td>Осталось времени</td>
             <td>${untilTime}</td>
         </tr>
         <tr>
-            <td>priorityID</td>
+            <td>Идентификатор приоритета</td>
             <td>${priorityID}</td>
         </tr>
         <tr>
-            <td>getCreated</td>
+            <td>Дата создания</td>
             <td>${getCreated}</td>
         </tr>
         <tr>
-            <td>queueID</td>
+            <td>Идентификатор очереди</td>
             <td>${queueID}</td>
         </tr>
         <tr>
-            <td>ownerID</td>
+            <td>Идентификатор владельца</td>
             <td>${ownerID}</td>
         </tr>
         <tr>
-            <td>escalationTime</td>
+            <td>Увеличение времени</td>
             <td>${escalationTime}</td>
         </tr>
         <tr>
-            <td>owner</td>
+            <td>Владелец</td>
             <td>${owner}</td>
         </tr>
         <tr>
-            <td>slaid</td>
+            <td>SLAID</td>
             <td>${slaid}</td>
         </tr>
         <tr>
-            <td>unlockTimeout</td>
+            <td>Время ожидания разблокировки</td>
             <td>${unlockTimeout}</td>
         </tr>
         <tr>
-            <td>getLockID</td>
+            <td>Идентификатор блокировки</td>
             <td>${getLockID}</td>
         </tr>
         <tr>
-            <td>customerUserID</td>
+            <td>Идентификатор клиента</td>
             <td>${customerUserID}</td>
         </tr>
         <tr>
-            <td>stateID</td>
+            <td>Идентификатор состояния</td>
             <td>${stateID}</td>
         </tr>
         <tr>
-            <td>groupID</td>
+            <td>Идентификатор группы</td>
             <td>${groupID}</td>
         </tr>
         <tr>
-            <td>timeUnit</td>
+            <td>Еденица времени</td>
             <td>${timeUnit}</td>
         </tr>
         <tr>
-            <td>serviceID</td>
+            <td>Идентификатор службы</td>
             <td>${serviceID}</td>
         </tr>
         <tr>
-            <td>lock</td>
+            <td>Заблокированно</td>
             <td>${lock}</td>
         </tr>
         <tr>
-            <td>state</td>
+            <td>Статус</td>
             <td>${state}</td>
         </tr>
         <tr>
-            <td>type</td>
+            <td>Тип</td>
             <td>${type}</td>
         </tr>
         <tr>
-            <td>responsible</td>
+            <td>Ответственный</td>
             <td>${responsible}</td>
         </tr>
         <tr>
-            <td>changeBy</td>
+            <td>Изменён</td>
             <td>${changeBy}</td>
         </tr>
         <tr>
-            <td>stateType</td>
+            <td>Тип статуса</td>
             <td>${stateType}</td>
         </tr>
         <tr>
-            <td>queue</td>
+            <td>Очередь</td>
             <td>${queue}</td>
         </tr>
         <tr>
-            <td>changed</td>
+            <td>Изменено</td>
             <td>${changed}</td>
         </tr>
         <tr>
-            <td>ticketNumber</td>
+            <td>Номер заявки</td>
             <td>${ticketNumber}</td>
         </tr>
         <tr>
-            <td>title</td>
+            <td>Заголовок</td>
             <td>${title}</td>
         </tr>
         <tr>
-            <td>age</td>
+            <td>Возраст</td>
             <td>${age}</td>
         </tr>
         <tr>
-            <td>ticketID</td>
+            <td>Идентификатор заявки</td>
             <td>${ticketID}</td>
         </tr>
     </table>

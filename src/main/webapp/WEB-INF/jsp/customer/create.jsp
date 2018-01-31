@@ -22,7 +22,7 @@
 <jsp:directive.include file="/WEB-INF/jspf/customer_head.jspf" />
 
 <div class="container">
-    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-5">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
         <h1>Система учёта заявок</h1>
         <form action="/create" method="post">
             <div class="form-group">
