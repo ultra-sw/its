@@ -25,9 +25,10 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         boolean roleAgent = true;
+        int agentID=0;
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-
+        OtrsUserInfo userInfo;
         //TODO get session id from otrs1
         UriComponents uri = UriComponentsBuilder
                 .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session")
@@ -55,8 +56,9 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
         else{
 
             String url = "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Session/" + otrsSession.getSessionId();
-            OtrsUserInfo userInfo = restTemplate.getForObject(url, OtrsUserInfo.class);
+            userInfo = restTemplate.getForObject(url, OtrsUserInfo.class);
             System.out.print(userInfo.getSessionDataMap());
+
         }
 
         //TODO callSESSION
@@ -77,12 +79,13 @@ public class OtrsAuthenticationProvider implements AuthenticationProvider {
        
         if(roleAgent == true) {
             authorities.add(new SimpleGrantedAuthority("ROLE_AGENT"));
+            agentID = userInfo.getAgentID();
         } else {
             authorities.add(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
         }
-
+        System.out.println(otrsSession.getSessionId());
         return new UsernamePasswordAuthenticationToken(new OtrsAuthenticationInfo(otrsSession.getSessionId(),
-                username, roleAgent), authentication.getCredentials(), authorities);
+                username, roleAgent, agentID), authentication.getCredentials(), authorities);
     }
 
     @Override

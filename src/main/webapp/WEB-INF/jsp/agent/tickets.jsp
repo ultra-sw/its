@@ -31,7 +31,7 @@
             <c:forEach var="ticket" items="${tickets}">
                 <tr>
                     <td>${ticket.id}</td>
-                    <td>${ticket.title}</td>
+                     <td><a href="/agent/tickets/${ticket.id}">${ticket.title}</a></td>
                     <td>${ticket.created}</td>
                     <td>${ticket.state}</td>
                 </tr>

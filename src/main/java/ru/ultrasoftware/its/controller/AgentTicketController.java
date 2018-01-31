@@ -11,6 +11,7 @@ import ru.ultrasoftware.its.domain.Content;
 import ru.ultrasoftware.its.domain.OtrsUserTickets;
 import ru.ultrasoftware.its.domain.Ticket;
 import ru.ultrasoftware.its.domain.TicketInfo;
+import ru.ultrasoftware.its.security.OtrsAuthenticationProvider;
 import ru.ultrasoftware.its.service.SecurityService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,15 +33,15 @@ public class AgentTicketController {
 
     @RequestMapping("/agent/tickets")
     public ModelAndView tickets(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        UriComponents uri = UriComponentsBuilder.fromHttpUrl(
-                "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
-                .queryParam("SessionID", securityService.currentUser().getSessionId()).build();
+       UriComponents uri = UriComponentsBuilder
+                .fromHttpUrl("http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket")
+                .queryParam("SessionID",  securityService.currentUser().getSessionId())
+                .queryParam("OwnerIDs", securityService.currentUser().getAgentID())
+                .build();
         String urlString = uri.toUriString();
         RestTemplate restTemplate = new RestTemplate();
         OtrsUserTickets otrsUserTickets = restTemplate.getForObject(urlString, OtrsUserTickets.class);
         List<Ticket> tickets = new ArrayList<Ticket>(otrsUserTickets.getTicketIds().size());
-
-
         for(Integer ticketId : otrsUserTickets.getTicketIds()) {
             uri = UriComponentsBuilder.fromHttpUrl(
                     "http://it.nvrs.net:7777/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket/" + ticketId)
@@ -56,7 +57,7 @@ public class AgentTicketController {
                 ticket.setCreated(ticket1.getCreated());
                 tickets.add(ticket);
             }}
-        ModelAndView mv = new ModelAndView("/customer/tickets");
+        ModelAndView mv = new ModelAndView("/agent/tickets");
         mv.addObject("tickets", tickets);
 
         return mv;
