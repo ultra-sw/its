@@ -1,7 +1,5 @@
 package ru.ultrasoftware.its.domain;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Content {
@@ -123,13 +121,13 @@ public class Content {
     public Integer getOwnerID() {
         return ownerID;
     }
-    public String geEscalationTime() {
+    public String getEscalationTime() {
         return escalationTime;
     }
     public String getOwner() {
         return owner;
     }
-    public String getSLAID() {
+    public String getSlaid() {
         return slaid;
     }
     public String getUnlockTimeout() {
@@ -187,5 +185,4 @@ public class Content {
     public Integer getTicketID() {
         return ticketID;
     }
-
 }
