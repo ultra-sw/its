@@ -25,151 +25,151 @@
     <table class="table table-bordered">
         <tr>
             <td>Расширение времени выполнения</td>
-            <td>${escalationSolutionTime}</td>
+            <td>${ticket.escalationSolutionTime}</td>
         </tr>
         <tr>
             <td>Создан</td>
-            <td>${createBy}</td>
+            <td>${ticket.createBy}</td>
         </tr>
         <tr>
             <td>Приоритет</td>
-            <td>${priority}</td>
+            <td>${ticket.priority}</td>
         </tr>
         <tr>
             <td>Идентификатор клиента</td>
-            <td>${customerID}</td>
+            <td>${ticket.customerID}</td>
         </tr>
         <tr>
             <td>Идентификатор ответственного</td>
-            <td>$responsibleID{}</td>
+            <td>${ticket.responsibleID}</td>
         </tr>
         <tr>
             <td>В данное время не используется</td>
-            <td>${realTillTimeNotUsed}</td>
+            <td>${ticket.realTillTimeNotUsed}</td>
         </tr>
         <tr>
             <td>Расширение времени обновления</td>
-            <td>${escalationUpdateTime}</td>
+            <td>${ticket.escalationUpdateTime}</td>
         </tr>
         <tr>
             <td>Расширение времени ответа</td>
-            <td>${escalationResponseTime}</td>
+            <td>${ticket.escalationResponseTime}</td>
         </tr>
         <tr>
             <td>Идентификатор типа</td>
-            <td>${typeID}</td>
+            <td>${ticket.typeID}</td>
         </tr>
         <tr>
             <td>В архиве</td>
-            <td>${archiveFlag}</td>
+            <td>${ticket.archiveFlag}</td>
         </tr>
         <tr>
             <td>Осталось времени</td>
-            <td>${untilTime}</td>
+            <td>${ticket.untilTime}</td>
         </tr>
         <tr>
             <td>Идентификатор приоритета</td>
-            <td>${priorityID}</td>
+            <td>${ticket.priorityID}</td>
         </tr>
         <tr>
             <td>Дата создания</td>
-            <td>${getCreated}</td>
+            <td>${ticket.created}</td>
         </tr>
         <tr>
             <td>Идентификатор очереди</td>
-            <td>${queueID}</td>
+            <td>${ticket.queueID}</td>
         </tr>
         <tr>
             <td>Идентификатор владельца</td>
-            <td>${ownerID}</td>
+            <td>${ticket.ownerID}</td>
         </tr>
         <tr>
             <td>Увеличение времени</td>
-            <td>${escalationTime}</td>
+            <td>${ticket.escalationTime}</td>
         </tr>
         <tr>
             <td>Владелец</td>
-            <td>${owner}</td>
+            <td>${ticket.owner}</td>
         </tr>
         <tr>
             <td>SLAID</td>
-            <td>${slaid}</td>
+            <td>${ticket.slaid}</td>
         </tr>
         <tr>
             <td>Время ожидания разблокировки</td>
-            <td>${unlockTimeout}</td>
+            <td>${ticket.unlockTimeout}</td>
         </tr>
         <tr>
             <td>Идентификатор блокировки</td>
-            <td>${getLockID}</td>
+            <td>${ticket.lockID}</td>
         </tr>
         <tr>
             <td>Идентификатор клиента</td>
-            <td>${customerUserID}</td>
+            <td>${ticket.customerUserID}</td>
         </tr>
         <tr>
             <td>Идентификатор состояния</td>
-            <td>${stateID}</td>
+            <td>${ticket.stateID}</td>
         </tr>
         <tr>
             <td>Идентификатор группы</td>
-            <td>${groupID}</td>
+            <td>${ticket.groupID}</td>
         </tr>
         <tr>
             <td>Еденица времени</td>
-            <td>${timeUnit}</td>
+            <td>${ticket.timeUnit}</td>
         </tr>
         <tr>
             <td>Идентификатор службы</td>
-            <td>${serviceID}</td>
+            <td>${ticket.serviceID}</td>
         </tr>
         <tr>
             <td>Заблокированно</td>
-            <td>${lock}</td>
+            <td>${ticket.lock}</td>
         </tr>
         <tr>
             <td>Статус</td>
-            <td>${state}</td>
+            <td>${ticket.state}</td>
         </tr>
         <tr>
             <td>Тип</td>
-            <td>${type}</td>
+            <td>${ticket.type}</td>
         </tr>
         <tr>
             <td>Ответственный</td>
-            <td>${responsible}</td>
+            <td>${ticket.responsible}</td>
         </tr>
         <tr>
             <td>Изменён</td>
-            <td>${changeBy}</td>
+            <td>${ticket.changeBy}</td>
         </tr>
         <tr>
             <td>Тип статуса</td>
-            <td>${stateType}</td>
+            <td>${ticket.stateType}</td>
         </tr>
         <tr>
             <td>Очередь</td>
-            <td>${queue}</td>
+            <td>${ticket.queue}</td>
         </tr>
         <tr>
             <td>Изменено</td>
-            <td>${changed}</td>
+            <td>${ticket.changed}</td>
         </tr>
         <tr>
             <td>Номер заявки</td>
-            <td>${ticketNumber}</td>
+            <td>${ticket.ticketNumber}</td>
         </tr>
         <tr>
             <td>Заголовок</td>
-            <td>${title}</td>
+            <td>${ticket.title}</td>
         </tr>
         <tr>
             <td>Возраст</td>
-            <td>${age}</td>
+            <td>${ticket.age}</td>
         </tr>
         <tr>
             <td>Идентификатор заявки</td>
-            <td>${ticketID}</td>
+            <td>${ticket.ticketID}</td>
         </tr>
     </table>
 </div> 
